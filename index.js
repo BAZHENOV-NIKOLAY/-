@@ -4,7 +4,7 @@ const app = express();
 
 
 const arr = [];
-
+let i = 0;
 app.use('/',bodyParser());
 
 app.use("/api",(req,res, next) => {
@@ -13,6 +13,8 @@ app.use("/api",(req,res, next) => {
 });
 
 app.post("/api/login",(req,res,next) => {
+    i++;
+    if (i > 3) { throw "System Error" }
     const {login, password} = req.body;
     if (login === 'test' && password === '123') {
         res.json({token : "secret"});
